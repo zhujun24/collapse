@@ -186,33 +186,51 @@
 <script src="simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
-<span class="hljs-pi">'use strict'</span>;
+<span class="hljs-string">'use strict'</span>;
 
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'./simple.css'</span>);
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion/assets/index.css'</span>);
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion/assets/ant.css'</span>);
 <span class="hljs-keyword">var</span> Accordion = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion'</span>);
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
 
-<span class="hljs-keyword">var</span> items = [];
 
-<span class="hljs-keyword">var</span> text = <span class="hljs-string">`
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`</span>;
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = <span class="hljs-number">3</span>; i &lt; len; i++) {
-  items.push({
-    header: <span class="hljs-string">'This is panel header '</span> + i,
-    content: (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>{text.repeat(i + 1)}<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-    )</span>
-  });
-}
+<span class="hljs-keyword">var</span> text = `
+  A dog <span class="hljs-keyword">is</span> a type <span class="hljs-keyword">of</span> domesticated animal.
+  Known <span class="hljs-keyword">for</span> its loyalty <span class="hljs-keyword">and</span> faithfulness,
+  <span class="hljs-literal">it</span> can be found as a welcome guest <span class="hljs-keyword">in</span> many households across the world.
+`;
 
-React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Accordion</span> <span class="hljs-attribute">items</span>=<span class="hljs-value">{items}</span> /&gt;</span>,
-  document.getElementById('__react-content'));
-</span>
+<span class="hljs-keyword">var</span> Test = React.createClass({
+  getItems(){
+    <span class="hljs-keyword">var</span> items = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = <span class="hljs-number">3</span>; i &lt; len; i++) {
+      items.push({
+        <span class="hljs-attribute">header</span>: <span class="hljs-string">'This is panel header '</span> + i,
+        <span class="hljs-attribute">key</span>: i,
+        <span class="hljs-attribute">content</span>: (
+          &lt;p&gt;{text.repeat(parseInt(Math.random()*<span class="hljs-number">10</span>)+ <span class="hljs-number">1</span>)}&lt;/p&gt;
+        )
+      });
+    }
+    <span class="hljs-keyword">return</span> items;
+  },
+
+  reRender(){
+    <span class="hljs-keyword">this</span>.setState({
+      <span class="hljs-attribute">time</span>:<span class="hljs-number">1</span>
+    });
+  },
+
+  render() {
+    <span class="hljs-keyword">return</span> &lt;div style={{<span class="hljs-attribute">margin</span>: <span class="hljs-number">20</span>, <span class="hljs-attribute">width</span>: <span class="hljs-number">400</span>}}&gt;
+      &lt;button onClick={<span class="hljs-keyword">this</span>.reRender}&gt;reRender&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
+      &lt;Accordion
+        items={<span class="hljs-keyword">this</span>.getItems()} /&gt;
+    &lt;/div&gt;;
+  }
+});
+
+React.render(&lt;Test/&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>));
+
 </pre>
 </div>
 </body>

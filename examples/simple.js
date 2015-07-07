@@ -12,26 +12,54 @@ webpackJsonp([0,1],[
 	'use strict';
 	
 	__webpack_require__(2);
-	__webpack_require__(6);
-	__webpack_require__(8);
-	var Accordion = __webpack_require__(10);
-	var React = __webpack_require__(12);
-	
-	var items = [];
+	var Accordion = __webpack_require__(6);
+	var React = __webpack_require__(8);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
-	for (var i = 0, len = 3; i < len; i++) {
-	  items.push({
-	    header: 'This is panel header ' + i,
-	    content: React.createElement(
-	      'p',
-	      null,
-	      text.repeat(i + 1)
-	    )
-	  });
-	}
 	
-	React.render(React.createElement(Accordion, { items: items }), document.getElementById('__react-content'));
+	var Test = React.createClass({
+	  displayName: 'Test',
+	
+	  getItems: function getItems() {
+	    var items = [];
+	    for (var i = 0, len = 3; i < len; i++) {
+	      items.push({
+	        header: 'This is panel header ' + i,
+	        key: i,
+	        content: React.createElement(
+	          'p',
+	          null,
+	          text.repeat(parseInt(Math.random() * 10) + 1)
+	        )
+	      });
+	    }
+	    return items;
+	  },
+	
+	  reRender: function reRender() {
+	    this.setState({
+	      time: 1
+	    });
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { style: { margin: 20, width: 400 } },
+	      React.createElement(
+	        'button',
+	        { onClick: this.reRender },
+	        'reRender'
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(Accordion, {
+	        items: this.getItems() })
+	    );
+	  }
+	});
+	
+	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
 /* 2 */
@@ -47,8 +75,8 @@ webpackJsonp([0,1],[
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/examples/simple.css", function() {
-			var newContent = require("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/examples/simple.css");
+		module.hot.accept("!!/Users/yiminghe/code/react-components/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css", function() {
+			var newContent = require("!!/Users/yiminghe/code/react-components/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -61,7 +89,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, "body {\n  padding: 60px 40px;\n}\n.rc-accordion {\n  width: 500px;\n}\np {\n  padding: 0;\n  margin: 0;\n}\n\n", ""]);
+	exports.push([module.id, ".rc-accordion-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  transition-property: height;\n  overflow: hidden;\n}\n.rc-accordion {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-accordion-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-accordion-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-accordion-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-item-active .rc-accordion-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -284,73 +312,13 @@ webpackJsonp([0,1],[
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(7);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css", function() {
-			var newContent = require("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-accordion-content {\n  height: 0;\n  opacity: 0;\n  transition: all 0.3s ease-in;\n  overflow: hidden;\n}\n.rc-accordion-content-active {\n  opacity: 1;\n  height: auto;\n}\n", ""]);
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(9);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/ant.css", function() {
-			var newContent = require("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/ant.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-accordion {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-accordion-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-accordion-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-accordion-content-active {\n  padding: 16px;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-item-active .rc-accordion-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// export this package's api
 	'use strict';
 	
-	module.exports = __webpack_require__(11);
+	module.exports = __webpack_require__(7);
 
 /***/ },
-/* 11 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -363,8 +331,19 @@ webpackJsonp([0,1],[
 	  }return obj;
 	}
 	
-	var React = __webpack_require__(12);
-	var classnames = __webpack_require__(13);
+	var React = __webpack_require__(8);
+	var classnames = __webpack_require__(9);
+	var cssAnimation = __webpack_require__(10);
+	
+	function getActiveKey(props) {
+	  var activeKey = props.activeKey;
+	  if (!activeKey) {
+	    props.items.forEach(function (item) {
+	      activeKey = item.key;
+	    });
+	  }
+	  return activeKey;
+	}
 	
 	module.exports = React.createClass({
 	
@@ -379,28 +358,31 @@ webpackJsonp([0,1],[
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      items: [],
-	      prefixCls: 'rc-accordion',
-	      active: 0
+	      prefixCls: 'rc-accordion'
 	    };
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      active: this.props.active,
-	      height: 'auto'
+	      activeKey: getActiveKey(this.props)
 	    };
 	  },
 	
-	  handleClickItem: function handleClickItem(i) {
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if ('activeKey' in nextProps) {
+	      this.setState({
+	        activeKey: nextProps.activeKey
+	      });
+	    }
+	  },
+	
+	  handleClickItem: function handleClickItem(key) {
 	    var _this = this;
 	
 	    return function (e) {
-	      if (i === _this.state.active) {
-	        return _this.setState({ active: -1 });
-	      }
-	      var height = e.target.nextSibling.scrollHeight;
-	
-	      _this.setState({ active: i, height: height });
+	      _this.setState({
+	        activeKey: key
+	      });
 	    };
 	  },
 	
@@ -408,26 +390,50 @@ webpackJsonp([0,1],[
 	    var _this2 = this;
 	
 	    var prefixCls = this.props.prefixCls;
-	    var active = this.state.active;
+	    var activeKey = this.state.activeKey;
 	    return this.props.items.map(function (item, i) {
 	      var _classnames, _classnames2;
 	
 	      var headerCls = prefixCls + '-header';
 	      var key = item.key || i;
-	      var isActive = active === i;
+	      var isActive = activeKey === key;
 	      var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
-	
-	      var style = isActive ? { height: _this2.state.height } : {};
-	      var ref = isActive ? 'active' : null;
-	
 	      var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
-	      return React.createElement('div', { className: itemCls, key: key }, React.createElement('div', { className: headerCls, onClick: _this2.handleClickItem(i) }, item.header), React.createElement('div', { className: contentCls, style: style, ref: ref }, item.content));
+	      return React.createElement('div', { className: itemCls, key: key }, React.createElement('div', { className: headerCls, onClick: _this2.handleClickItem(key) }, item.header), React.createElement('div', { className: contentCls, ref: key }, item.content));
 	    });
 	  },
 	
+	  componentDidUpdate: function componentDidUpdate(_, prevState) {
+	    if (prevState.activeKey !== this.state.activeKey) {
+	      var preNode = React.findDOMNode(this.refs[prevState.activeKey]);
+	      var currentNode = React.findDOMNode(this.refs[this.state.activeKey]);
+	      preNode.style.height = preNode.scrollHeight + 'px';
+	      preNode.style.opacity = 1;
+	      currentNode.style.height = 0;
+	      cssAnimation.setTransition(preNode, 'Property', 'height ,opacity');
+	      cssAnimation.setTransition(currentNode, 'Property', 'height ,opacity');
+	      cssAnimation.style(preNode, {
+	        height: 0,
+	        opacity: 0
+	      }, function () {
+	        preNode.style.height = '';
+	        preNode.style.opacity = '';
+	        cssAnimation.setTransition(preNode, 'Property', '');
+	      });
+	      cssAnimation.style(currentNode, {
+	        height: currentNode.scrollHeight + 'px',
+	        opacity: 1
+	      }, function () {
+	        currentNode.style.height = 'auto';
+	        currentNode.style.opacity = 1;
+	        cssAnimation.setTransition(currentNode, 'Property', '');
+	      });
+	    }
+	  },
+	
 	  componentDidMount: function componentDidMount() {
-	    var el = React.findDOMNode(this.refs.active);
-	    el.style.height = el.clientHeight + 'px';
+	    React.findDOMNode(this.refs[this.state.activeKey]).style.height = 'auto';
+	    React.findDOMNode(this.refs[this.state.activeKey]).style.opacity = 1;
 	  },
 	
 	  render: function render() {
@@ -437,13 +443,13 @@ webpackJsonp([0,1],[
 	});
 
 /***/ },
-/* 12 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 13 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -496,6 +502,223 @@ webpackJsonp([0,1],[
 	
 	}());
 
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var Event = __webpack_require__(11);
+	var Css = __webpack_require__(12);
+	
+	var cssAnimation = function cssAnimation(node, transitionName, callback) {
+	  var className = transitionName;
+	  var activeClassName = className + '-active';
+	
+	  if (node.rcEndListener) {
+	    node.rcEndListener();
+	  }
+	
+	  node.rcEndListener = function (e) {
+	    if (e && e.target !== node) {
+	      return;
+	    }
+	
+	    if (node.rcAnimTimeout) {
+	      clearTimeout(node.rcAnimTimeout);
+	      node.rcAnimTimeout = null;
+	    }
+	
+	    Css.removeClass(node, className);
+	    Css.removeClass(node, activeClassName);
+	
+	    Event.removeEndEventListener(node, node.rcEndListener);
+	    node.rcEndListener = null;
+	
+	    // Usually this optional callback is used for informing an owner of
+	    // a leave animation and telling it to remove the child.
+	    if (callback) {
+	      callback();
+	    }
+	  };
+	
+	  Event.addEndEventListener(node, node.rcEndListener);
+	
+	  Css.addClass(node, className);
+	
+	  node.rcAnimTimeout = setTimeout(function () {
+	    Css.addClass(node, activeClassName);
+	    node.rcAnimTimeout = null;
+	  }, 0);
+	};
+	
+	cssAnimation.style = function (node, style, callback) {
+	  if (node.rcEndListener) {
+	    node.rcEndListener();
+	  }
+	
+	  node.rcEndListener = function (e) {
+	    if (e && e.target !== node) {
+	      return;
+	    }
+	
+	    if (node.rcAnimTimeout) {
+	      clearTimeout(node.rcAnimTimeout);
+	      node.rcAnimTimeout = null;
+	    }
+	
+	    Event.removeEndEventListener(node, node.rcEndListener);
+	    node.rcEndListener = null;
+	
+	    // Usually this optional callback is used for informing an owner of
+	    // a leave animation and telling it to remove the child.
+	    if (callback) {
+	      callback();
+	    }
+	  };
+	
+	  Event.addEndEventListener(node, node.rcEndListener);
+	
+	  node.rcAnimTimeout = setTimeout(function () {
+	    for (var s in style) {
+	      node.style[s] = style[s];
+	    }
+	    node.rcAnimTimeout = null;
+	  }, 0);
+	};
+	
+	cssAnimation.setTransition = function (node, property, v) {
+	  property = property || '';
+	  ['Webkit', 'Moz', 'O',
+	  // ms is special .... !
+	  'ms'].forEach(function (prefix) {
+	    node.style[prefix + 'Transition' + property] = v;
+	  });
+	};
+	
+	cssAnimation.addClass = Css.addClass;
+	cssAnimation.removeClass = Css.removeClass;
+	
+	module.exports = cssAnimation;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	
+	'use strict';
+	
+	var EVENT_NAME_MAP = {
+	  transitionend: {
+	    transition: 'transitionend',
+	    WebkitTransition: 'webkitTransitionEnd',
+	    MozTransition: 'mozTransitionEnd',
+	    OTransition: 'oTransitionEnd',
+	    msTransition: 'MSTransitionEnd'
+	  },
+	
+	  animationend: {
+	    animation: 'animationend',
+	    WebkitAnimation: 'webkitAnimationEnd',
+	    MozAnimation: 'mozAnimationEnd',
+	    OAnimation: 'oAnimationEnd',
+	    msAnimation: 'MSAnimationEnd'
+	  }
+	};
+	
+	var endEvents = [];
+	
+	function detectEvents() {
+	  var testEl = document.createElement('div');
+	  var style = testEl.style;
+	
+	  if (!('AnimationEvent' in window)) {
+	    delete EVENT_NAME_MAP.animationend.animation;
+	  }
+	
+	  if (!('TransitionEvent' in window)) {
+	    delete EVENT_NAME_MAP.transitionend.transition;
+	  }
+	
+	  for (var baseEventName in EVENT_NAME_MAP) {
+	    var baseEvents = EVENT_NAME_MAP[baseEventName];
+	    for (var styleName in baseEvents) {
+	      if (styleName in style) {
+	        endEvents.push(baseEvents[styleName]);
+	        break;
+	      }
+	    }
+	  }
+	}
+	
+	if (typeof window !== 'undefined') {
+	  detectEvents();
+	}
+	
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+	
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+	
+	var TransitionEvents = {
+	  addEndEventListener: function addEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+	
+	  endEvents: endEvents,
+	
+	  removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+	
+	module.exports = TransitionEvents;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var SPACE = ' ';
+	var RE_CLASS = /[\n\t\r]/g;
+	
+	var norm = function norm(elemClass) {
+	  return (SPACE + elemClass + SPACE).replace(RE_CLASS, SPACE);
+	};
+	
+	module.exports = {
+	  addClass: function addClass(elem, className) {
+	    elem.className += ' ' + className;
+	  },
+	
+	  removeClass: function removeClass(elem, needle) {
+	    var elemClass = elem.className.trim();
+	    var className = norm(elemClass);
+	    needle = needle.trim();
+	    needle = SPACE + needle + SPACE;
+	    // 一个 cls 有可能多次出现：'link link2 link link3 link'
+	    while (className.indexOf(needle) >= 0) {
+	      className = className.replace(needle, SPACE);
+	    }
+	    elem.className = className.trim();
+	  }
+	};
 
 /***/ }
 ]);

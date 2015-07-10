@@ -180,7 +180,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-accordion@1.0.1</h1>
+<h1>rc-accordion@1.1.0</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
@@ -190,6 +190,7 @@
 
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion/assets/index.css'</span>);
 <span class="hljs-keyword">var</span> Accordion = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion'</span>);
+<span class="hljs-keyword">var</span> Panel = Accordion.Panel;
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
 
 
@@ -200,31 +201,29 @@
 `;
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
-  getItems(){
+  getItems() {
     <span class="hljs-keyword">var</span> items = [];
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = <span class="hljs-number">3</span>; i &lt; len; i++) {
-      items.push({
-        <span class="hljs-attribute">header</span>: <span class="hljs-string">'This is panel header '</span> + i,
-        <span class="hljs-attribute">key</span>: i,
-        <span class="hljs-attribute">content</span>: (
-          &lt;p&gt;{text.repeat(parseInt(Math.random()*<span class="hljs-number">10</span>)+ <span class="hljs-number">1</span>)}&lt;/p&gt;
-        )
-      });
+      items.push(
+        &lt;Panel header={`This <span class="hljs-keyword">is</span> panel header ${i + <span class="hljs-number">1</span>}`} key={i}&gt;
+          &lt;p&gt;{text.repeat(parseInt(Math.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)}&lt;/p&gt;
+        &lt;/Panel&gt;
+      );
     }
+
     <span class="hljs-keyword">return</span> items;
   },
 
-  reRender(){
+  reRender() {
     <span class="hljs-keyword">this</span>.setState({
-      <span class="hljs-attribute">time</span>:<span class="hljs-number">1</span>
+      <span class="hljs-attribute">time</span>: <span class="hljs-number">1</span>
     });
   },
 
   render() {
     <span class="hljs-keyword">return</span> &lt;div style={{<span class="hljs-attribute">margin</span>: <span class="hljs-number">20</span>, <span class="hljs-attribute">width</span>: <span class="hljs-number">400</span>}}&gt;
       &lt;button onClick={<span class="hljs-keyword">this</span>.reRender}&gt;reRender&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
-      &lt;Accordion
-        items={<span class="hljs-keyword">this</span>.getItems()} /&gt;
+      &lt;Accordion&gt;{<span class="hljs-keyword">this</span>.getItems()}&lt;/Accordion&gt;
     &lt;/div&gt;;
   }
 });

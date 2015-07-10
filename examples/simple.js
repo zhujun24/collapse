@@ -13,6 +13,7 @@ webpackJsonp([0,1],[
 	
 	__webpack_require__(2);
 	var Accordion = __webpack_require__(6);
+	var Panel = Accordion.Panel;
 	var React = __webpack_require__(8);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
@@ -23,16 +24,17 @@ webpackJsonp([0,1],[
 	  getItems: function getItems() {
 	    var items = [];
 	    for (var i = 0, len = 3; i < len; i++) {
-	      items.push({
-	        header: 'This is panel header ' + i,
-	        key: i,
-	        content: React.createElement(
+	      items.push(React.createElement(
+	        Panel,
+	        { header: 'This is panel header ' + (i + 1), key: i },
+	        React.createElement(
 	          'p',
 	          null,
 	          text.repeat(parseInt(Math.random() * 10) + 1)
 	        )
-	      });
+	      ));
 	    }
+	
 	    return items;
 	  },
 	
@@ -53,8 +55,11 @@ webpackJsonp([0,1],[
 	      ),
 	      React.createElement('br', null),
 	      React.createElement('br', null),
-	      React.createElement(Accordion, {
-	        items: this.getItems() })
+	      React.createElement(
+	        Accordion,
+	        null,
+	        this.getItems()
+	      )
 	    );
 	  }
 	});
@@ -89,7 +94,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-accordion-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  transition-property: height;\n  overflow: hidden;\n}\n.rc-accordion {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-accordion-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-accordion-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-accordion-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-item-active .rc-accordion-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
+	exports.push([module.id, ".rc-accordion-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  overflow: hidden;\n}\n.rc-accordion-content-active {\n  opacity: 1;\n  height: auto;\n}\n.rc-accordion {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-accordion-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-accordion-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-accordion-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-item-active .rc-accordion-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -316,6 +321,7 @@ webpackJsonp([0,1],[
 	'use strict';
 	
 	module.exports = __webpack_require__(7);
+	module.exports.Panel = __webpack_require__(9);
 
 /***/ },
 /* 7 */
@@ -323,48 +329,29 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-	  } else {
-	    obj[key] = value;
-	  }return obj;
-	}
-	
 	var React = __webpack_require__(8);
-	var classnames = __webpack_require__(9);
-	var cssAnimation = __webpack_require__(10);
-	
-	function getActiveKey(props) {
-	  var activeKey = props.activeKey;
-	  if (!activeKey) {
-	    props.items.forEach(function (item) {
-	      activeKey = item.key;
-	    });
-	  }
-	  return activeKey;
-	}
+	var AccordionPanel = __webpack_require__(9);
 	
 	module.exports = React.createClass({
 	
 	  displayName: 'Accordion',
 	
 	  propTypes: {
-	    items: React.PropTypes.array,
 	    prefixCls: React.PropTypes.string,
-	    active: React.PropTypes.number
+	    activeKey: React.PropTypes.string,
+	    onSwitch: React.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      items: [],
-	      prefixCls: 'rc-accordion'
+	      prefixCls: 'rc-accordion',
+	      onSwitch: function onSwitch() {}
 	    };
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      activeKey: getActiveKey(this.props)
+	      activeKey: null
 	    };
 	  },
 	
@@ -379,7 +366,8 @@ webpackJsonp([0,1],[
 	  handleClickItem: function handleClickItem(key) {
 	    var _this = this;
 	
-	    return function (e) {
+	    return function () {
+	      _this.props.onSwitch(key);
 	      _this.setState({
 	        activeKey: key
 	      });
@@ -389,51 +377,30 @@ webpackJsonp([0,1],[
 	  getItems: function getItems() {
 	    var _this2 = this;
 	
-	    var prefixCls = this.props.prefixCls;
 	    var activeKey = this.state.activeKey;
-	    return this.props.items.map(function (item, i) {
-	      var _classnames, _classnames2;
+	    var prefixCls = this.props.prefixCls;
+	    return React.Children.map(this.props.children, function (child, i) {
+	      // If there is no key provide, use the panel order as default key
+	      var key = child.key || i;
+	      var header = child.props.header;
+	      var isActive = false;
+	      if (!activeKey) {
+	        isActive = !i;
+	      } else {
+	        isActive = activeKey === key;
+	      }
 	
-	      var headerCls = prefixCls + '-header';
-	      var key = item.key || i;
-	      var isActive = activeKey === key;
-	      var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
-	      var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
-	      return React.createElement('div', { className: itemCls, key: key }, React.createElement('div', { className: headerCls, onClick: _this2.handleClickItem(key) }, item.header), React.createElement('div', { className: contentCls, ref: key }, item.content));
+	      var props = {
+	        key: key,
+	        header: header,
+	        isActive: isActive,
+	        prefixCls: prefixCls,
+	        children: child.props.children,
+	        onItemClick: _this2.handleClickItem(key).bind(_this2)
+	      };
+	
+	      return React.createElement(AccordionPanel, props);
 	    });
-	  },
-	
-	  componentDidUpdate: function componentDidUpdate(_, prevState) {
-	    if (prevState.activeKey !== this.state.activeKey) {
-	      var preNode = React.findDOMNode(this.refs[prevState.activeKey]);
-	      var currentNode = React.findDOMNode(this.refs[this.state.activeKey]);
-	      preNode.style.height = preNode.scrollHeight + 'px';
-	      preNode.style.opacity = 1;
-	      currentNode.style.height = 0;
-	      cssAnimation.setTransition(preNode, 'Property', 'height ,opacity');
-	      cssAnimation.setTransition(currentNode, 'Property', 'height ,opacity');
-	      cssAnimation.style(preNode, {
-	        height: 0,
-	        opacity: 0
-	      }, function () {
-	        preNode.style.height = '';
-	        preNode.style.opacity = '';
-	        cssAnimation.setTransition(preNode, 'Property', '');
-	      });
-	      cssAnimation.style(currentNode, {
-	        height: currentNode.scrollHeight + 'px',
-	        opacity: 1
-	      }, function () {
-	        currentNode.style.height = 'auto';
-	        currentNode.style.opacity = 1;
-	        cssAnimation.setTransition(currentNode, 'Property', '');
-	      });
-	    }
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    React.findDOMNode(this.refs[this.state.activeKey]).style.height = 'auto';
-	    React.findDOMNode(this.refs[this.state.activeKey]).style.opacity = 1;
 	  },
 	
 	  render: function render() {
@@ -450,6 +417,109 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+	  } else {
+	    obj[key] = value;
+	  }return obj;
+	}
+	
+	var _require = __webpack_require__(8);
+	
+	var createClass = _require.createClass;
+	var PropTypes = _require.PropTypes;
+	var findDOMNode = _require.findDOMNode;
+	
+	var classnames = __webpack_require__(10);
+	var cssAnimation = __webpack_require__(11);
+	
+	module.exports = createClass({
+	
+	  displayName: 'AccordionPanel',
+	
+	  propTypes: {
+	    prefixCls: PropTypes.string,
+	    header: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
+	    isActive: PropTypes.bool,
+	    onItemClick: PropTypes.func
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      isActive: false,
+	      onItemClick: function onItemClick() {}
+	    };
+	  },
+	
+	  render: function render() {
+	    var _classnames, _classnames2;
+	
+	    var _props = this.props;
+	    var prefixCls = _props.prefixCls;
+	    var header = _props.header;
+	    var children = _props.children;
+	    var onItemClick = _props.onItemClick;
+	    var isActive = _props.isActive;
+	
+	    var headerCls = prefixCls + '-header';
+	    var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
+	    var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
+	
+	    return React.createElement('div', { className: itemCls }, React.createElement('div', { className: headerCls, onClick: onItemClick }, header), React.createElement('div', { className: contentCls, ref: 'content' }, children));
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    if (this.props.isActive) {
+	      var el = findDOMNode(this.refs.content);
+	      el.style.height = el.scrollHeight + 'px';
+	    }
+	  },
+	
+	  componentDidUpdate: function componentDidUpdate(prevProps) {
+	
+	    // no change
+	    if (prevProps.isActive === this.props.isActive) {
+	      return;
+	    }
+	
+	    // current isActive
+	    if (!this.props.isActive) {
+	      var preNode = findDOMNode(this.refs.content);
+	      preNode.style.height = preNode.scrollHeight + 'px';
+	      preNode.style.opacity = 1;
+	      cssAnimation.setTransition(preNode, 'Property', 'height ,opacity');
+	      cssAnimation.style(preNode, {
+	        height: 0,
+	        opacity: 0
+	      }, function () {
+	        preNode.style.height = '';
+	        preNode.style.opacity = '';
+	        cssAnimation.setTransition(preNode, 'Property', '');
+	      });
+	    } else {
+	      // from isActive to hide
+	      var currentNode = findDOMNode(this.refs.content);
+	      currentNode.style.height = 0;
+	      cssAnimation.setTransition(currentNode, 'Property', 'height ,opacity');
+	      cssAnimation.style(currentNode, {
+	        height: currentNode.scrollHeight + 'px',
+	        opacity: 1
+	      }, function () {
+	        currentNode.style.height = 'auto';
+	        currentNode.style.opacity = 1;
+	        cssAnimation.setTransition(currentNode, 'Property', '');
+	      });
+	    }
+	  }
+	});
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -504,13 +574,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(11);
-	var Css = __webpack_require__(12);
+	var Event = __webpack_require__(12);
+	var Css = __webpack_require__(13);
 	
 	var cssAnimation = function cssAnimation(node, transitionName, callback) {
 	  var className = transitionName;
@@ -603,7 +673,7 @@ webpackJsonp([0,1],[
 	module.exports = cssAnimation;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	
@@ -690,7 +760,7 @@ webpackJsonp([0,1],[
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';

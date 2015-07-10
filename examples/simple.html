@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rc-accordion-simple</title>
+  <title>rc-collapse-simple</title>
   <meta http-equiv=Content-Type content="text/html;charset=utf-8">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
   <style>
@@ -180,7 +180,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-accordion@1.1.0</h1>
+<h1>rc-collapse@1.2.0</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
@@ -188,9 +188,9 @@
 <pre>
 <span class="hljs-string">'use strict'</span>;
 
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion/assets/index.css'</span>);
-<span class="hljs-keyword">var</span> Accordion = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion'</span>);
-<span class="hljs-keyword">var</span> Panel = Accordion.Panel;
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-collapse/assets/index.css'</span>);
+<span class="hljs-keyword">var</span> Collapse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-collapse'</span>);
+<span class="hljs-keyword">var</span> Panel = Collapse.Panel;
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
 
 
@@ -200,13 +200,25 @@
   <span class="hljs-literal">it</span> can be found as a welcome guest <span class="hljs-keyword">in</span> many households across the world.
 `;
 
+<span class="hljs-keyword">function</span> random() {
+  <span class="hljs-keyword">return</span> parseInt(Math.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>;
+}
+
 <span class="hljs-keyword">var</span> Test = React.createClass({
+  getInitialState() {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attribute">time</span>: random(),
+      <span class="hljs-attribute">accordion</span>: <span class="hljs-literal">false</span>
+    };
+  },
+
   getItems() {
     <span class="hljs-keyword">var</span> items = [];
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = <span class="hljs-number">3</span>; i &lt; len; i++) {
+      <span class="hljs-keyword">var</span> key = i + <span class="hljs-number">1</span>;
       items.push(
-        &lt;Panel header={`This <span class="hljs-keyword">is</span> panel header ${i + <span class="hljs-number">1</span>}`} key={i}&gt;
-          &lt;p&gt;{text.repeat(parseInt(Math.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)}&lt;/p&gt;
+        &lt;Panel header={`This <span class="hljs-keyword">is</span> panel header ${key}`} key={key}&gt;
+          &lt;p&gt;{text.repeat(<span class="hljs-keyword">this</span>.state.time)}&lt;/p&gt;
         &lt;/Panel&gt;
       );
     }
@@ -214,16 +226,27 @@
     <span class="hljs-keyword">return</span> items;
   },
 
+  toggle() {
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attribute">accordion</span>: !<span class="hljs-keyword">this</span>.state.accordion });
+  },
+
   reRender() {
-    <span class="hljs-keyword">this</span>.setState({
-      <span class="hljs-attribute">time</span>: <span class="hljs-number">1</span>
-    });
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attribute">time</span>: random() });
+  },
+
+  setActivityKey() {
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attribute">activeKey</span>: [<span class="hljs-string">'2'</span>] });
   },
 
   render() {
+    <span class="hljs-keyword">var</span> accordion = <span class="hljs-keyword">this</span>.state.accordion;
+    <span class="hljs-keyword">var</span> btn = accordion ? <span class="hljs-string">'accordion'</span> : <span class="hljs-string">'collapse'</span>;
+    <span class="hljs-keyword">var</span> activeKey = <span class="hljs-keyword">this</span>.state.activeKey;
     <span class="hljs-keyword">return</span> &lt;div style={{<span class="hljs-attribute">margin</span>: <span class="hljs-number">20</span>, <span class="hljs-attribute">width</span>: <span class="hljs-number">400</span>}}&gt;
-      &lt;button onClick={<span class="hljs-keyword">this</span>.reRender}&gt;reRender&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
-      &lt;Accordion&gt;{<span class="hljs-keyword">this</span>.getItems()}&lt;/Accordion&gt;
+      &lt;button onClick={<span class="hljs-keyword">this</span>.reRender}&gt;reRender&lt;/button&gt;
+      &lt;button onClick={<span class="hljs-keyword">this</span>.toggle}&gt;{btn}&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
+      &lt;button onClick={<span class="hljs-keyword">this</span>.setActivityKey}&gt;active header <span class="hljs-number">2</span>&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
+      &lt;Collapse accordion={accordion} activeKey={activeKey} defaultActiveKey={[<span class="hljs-string">'3'</span>]}&gt;{<span class="hljs-keyword">this</span>.getItems()}&lt;/Collapse&gt;
     &lt;/div&gt;;
   }
 });

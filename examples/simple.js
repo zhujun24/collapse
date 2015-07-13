@@ -12,9 +12,10 @@ webpackJsonp([0,1],[
 	'use strict';
 	
 	__webpack_require__(2);
-	var Collapse = __webpack_require__(6);
+	__webpack_require__(6);
+	var Collapse = __webpack_require__(7);
 	var Panel = Collapse.Panel;
-	var React = __webpack_require__(8);
+	var React = __webpack_require__(9);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
@@ -46,6 +47,23 @@ webpackJsonp([0,1],[
 	        )
 	      ));
 	    }
+	    items.push(React.createElement(
+	      Panel,
+	      { header: 'This is panel header 4', key: '4' },
+	      React.createElement(
+	        Collapse,
+	        { defaultActiveKey: '1' },
+	        React.createElement(
+	          Panel,
+	          { header: 'This is panel nest panel', key: '1' },
+	          React.createElement(
+	            'p',
+	            null,
+	            text
+	          )
+	        )
+	      )
+	    ));
 	
 	    return items;
 	  },
@@ -90,7 +108,7 @@ webpackJsonp([0,1],[
 	      React.createElement('br', null),
 	      React.createElement(
 	        Collapse,
-	        { accordion: accordion, activeKey: activeKey, defaultActiveKey: ['3'] },
+	        { accordion: accordion, activeKey: activeKey, defaultActiveKey: ['4'] },
 	        this.getItems()
 	      )
 	    );
@@ -127,7 +145,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-collapse-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  overflow: hidden;\n}\n.rc-collapse-content-active {\n  opacity: 1;\n  height: auto;\n}\n.rc-collapse {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-collapse-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-item-active .rc-collapse-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
+	exports.push([module.id, ".rc-collapse-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  overflow: hidden;\n}\n.rc-collapse-content > p,\n.rc-collapse-content > div {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-collapse-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-item-active .rc-collapse-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -348,27 +366,83 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	// export this package's api
-	'use strict';
-	
-	module.exports = __webpack_require__(7);
-	module.exports.Panel = __webpack_require__(9);
+	/*! http://mths.be/repeat v0.2.0 by @mathias */
+	if (!String.prototype.repeat) {
+		(function() {
+			'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
+			var defineProperty = (function() {
+				// IE 8 only supports `Object.defineProperty` on DOM elements
+				try {
+					var object = {};
+					var $defineProperty = Object.defineProperty;
+					var result = $defineProperty(object, object, object) && $defineProperty;
+				} catch(error) {}
+				return result;
+			}());
+			var repeat = function(count) {
+				if (this == null) {
+					throw TypeError();
+				}
+				var string = String(this);
+				// `ToInteger`
+				var n = count ? Number(count) : 0;
+				if (n != n) { // better `isNaN`
+					n = 0;
+				}
+				// Account for out-of-bounds indices
+				if (n < 0 || n == Infinity) {
+					throw RangeError();
+				}
+				var result = '';
+				while (n) {
+					if (n % 2 == 1) {
+						result += string;
+					}
+					if (n > 1) {
+						string += string;
+					}
+					n >>= 1;
+				}
+				return result;
+			};
+			if (defineProperty) {
+				defineProperty(String.prototype, 'repeat', {
+					'value': repeat,
+					'configurable': true,
+					'writable': true
+				});
+			} else {
+				String.prototype.repeat = repeat;
+			}
+		}());
+	}
+
 
 /***/ },
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// export this package's api
 	'use strict';
 	
-	var _require = __webpack_require__(8);
+	module.exports = __webpack_require__(8);
+	module.exports.Panel = __webpack_require__(10);
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _require = __webpack_require__(9);
 	
 	var PropTypes = _require.PropTypes;
 	var createClass = _require.createClass;
 	var Children = _require.Children;
 	
-	var CollapsePanel = __webpack_require__(9);
+	var CollapsePanel = __webpack_require__(10);
 	
 	if (!Array.isArray) {
 	  Array.isArray = function (arg) {
@@ -499,13 +573,13 @@ webpackJsonp([0,1],[
 	});
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -518,14 +592,14 @@ webpackJsonp([0,1],[
 	  }return obj;
 	}
 	
-	var _require = __webpack_require__(8);
+	var _require = __webpack_require__(9);
 	
 	var createClass = _require.createClass;
 	var PropTypes = _require.PropTypes;
 	var findDOMNode = _require.findDOMNode;
 	
-	var classnames = __webpack_require__(10);
-	var cssAnimation = __webpack_require__(11);
+	var classnames = __webpack_require__(11);
+	var cssAnimation = __webpack_require__(12);
 	
 	module.exports = createClass({
 	
@@ -572,7 +646,8 @@ webpackJsonp([0,1],[
 	  componentDidMount: function componentDidMount() {
 	    if (this.props.isActive) {
 	      var el = findDOMNode(this.refs.content);
-	      el.style.height = el.scrollHeight + 'px';
+	      el.style.height = 'auto';
+	      el.style.opacity = 1;
 	    }
 	  },
 	
@@ -585,39 +660,32 @@ webpackJsonp([0,1],[
 	      return;
 	    }
 	
-	    // current isActive
-	    if (!isActive) {
-	      var preNode = findDOMNode(this.refs.content);
-	      preNode.style.height = preNode.scrollHeight + 'px';
-	      preNode.style.opacity = 1;
-	      cssAnimation.setTransition(preNode, 'Property', 'height ,opacity');
-	      cssAnimation.style(preNode, {
-	        height: 0,
-	        opacity: 0
-	      }, function () {
-	        preNode.style.height = '';
-	        preNode.style.opacity = '';
-	        cssAnimation.setTransition(preNode, 'Property', '');
-	      });
-	    } else {
-	      // from isActive to hide
-	      var currentNode = findDOMNode(this.refs.content);
-	      currentNode.style.height = 0;
-	      cssAnimation.setTransition(currentNode, 'Property', 'height ,opacity');
-	      cssAnimation.style(currentNode, {
-	        height: currentNode.scrollHeight + 'px',
-	        opacity: 1
-	      }, function () {
-	        currentNode.style.height = 'auto';
-	        currentNode.style.opacity = 1;
-	        cssAnimation.setTransition(currentNode, 'Property', '');
-	      });
-	    }
+	    this._anim(isActive ? 0 : 1);
+	  },
+	
+	  _anim: function _anim(opacity) {
+	    var el = findDOMNode(this.refs.content);
+	    var scrollHeight = el.scrollHeight + 'px';
+	
+	    // start state
+	    el.style.height = opacity ? scrollHeight : 0;
+	    el.style.opacity = opacity;
+	
+	    cssAnimation.setTransition(el, 'Property', 'height ,opacity');
+	    cssAnimation.style(el, {
+	      height: opacity ? 0 : scrollHeight,
+	      opacity: opacity ? 0 : 1
+	    }, function () {
+	      el.style.height = opacity ? 0 : 'auto';
+	      el.style.opacity = opacity ? 0 : 1;
+	      cssAnimation.setTransition(el, 'Property', '');
+	    });
 	  }
+	
 	});
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -672,13 +740,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(12);
-	var Css = __webpack_require__(13);
+	var Event = __webpack_require__(13);
+	var Css = __webpack_require__(14);
 	
 	var cssAnimation = function cssAnimation(node, transitionName, callback) {
 	  var className = transitionName;
@@ -771,7 +839,7 @@ webpackJsonp([0,1],[
 	module.exports = cssAnimation;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	
@@ -858,7 +926,7 @@ webpackJsonp([0,1],[
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';

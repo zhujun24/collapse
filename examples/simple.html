@@ -180,7 +180,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-collapse@1.2.0</h1>
+<h1>rc-collapse@1.2.1</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
@@ -189,10 +189,10 @@
 <span class="hljs-string">'use strict'</span>;
 
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-collapse/assets/index.css'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'string.prototype.repeat'</span>);
 <span class="hljs-keyword">var</span> Collapse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-collapse'</span>);
 <span class="hljs-keyword">var</span> Panel = Collapse.Panel;
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
-
 
 <span class="hljs-keyword">var</span> text = `
   A dog <span class="hljs-keyword">is</span> a type <span class="hljs-keyword">of</span> domesticated animal.
@@ -222,6 +222,15 @@
         &lt;/Panel&gt;
       );
     }
+    items.push(
+      &lt;Panel header={`This <span class="hljs-keyword">is</span> panel header <span class="hljs-number">4</span>`} key=<span class="hljs-string">"4"</span>&gt;
+        &lt;Collapse defaultActiveKey=<span class="hljs-string">"1"</span>&gt;
+          &lt;Panel header={`This <span class="hljs-keyword">is</span> panel nest panel`} key=<span class="hljs-string">"1"</span>&gt;
+            &lt;p&gt;{text}&lt;/p&gt;
+          &lt;/Panel&gt;
+        &lt;/Collapse&gt;
+      &lt;/Panel&gt;
+    );
 
     <span class="hljs-keyword">return</span> items;
   },
@@ -246,7 +255,7 @@
       &lt;button onClick={<span class="hljs-keyword">this</span>.reRender}&gt;reRender&lt;/button&gt;
       &lt;button onClick={<span class="hljs-keyword">this</span>.toggle}&gt;{btn}&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
       &lt;button onClick={<span class="hljs-keyword">this</span>.setActivityKey}&gt;active header <span class="hljs-number">2</span>&lt;<span class="hljs-pi">/button&gt;&lt;br/</span>&gt;&lt;br/&gt;
-      &lt;Collapse accordion={accordion} activeKey={activeKey} defaultActiveKey={[<span class="hljs-string">'3'</span>]}&gt;{<span class="hljs-keyword">this</span>.getItems()}&lt;/Collapse&gt;
+      &lt;Collapse accordion={accordion} activeKey={activeKey} defaultActiveKey={[<span class="hljs-string">'4'</span>]}&gt;{<span class="hljs-keyword">this</span>.getItems()}&lt;/Collapse&gt;
     &lt;/div&gt;;
   }
 });

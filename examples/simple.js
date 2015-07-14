@@ -145,7 +145,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-collapse-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  overflow: hidden;\n}\n.rc-collapse-content > p,\n.rc-collapse-content > div {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-collapse-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-collapse-item-active .rc-collapse-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
+	exports.push([module.id, ".rc-collapse-content {\n  height: 0;\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  overflow: hidden;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse {\n  background-color: #fbfbfb;\n  border-radius: 3px;\n  border-top: 1px solid #e9e9e9;\n  border-left: 1px solid #e9e9e9;\n  border-right: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #f4f4f4;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse-content-active {\n  border-bottom: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header {\n  border-bottom: none;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -640,14 +640,14 @@ webpackJsonp([0,1],[
 	    var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
 	    var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
 	
-	    return React.createElement('div', { className: itemCls }, React.createElement('div', { className: headerCls, onClick: this.handleItemClick }, header), React.createElement('div', { className: contentCls, ref: 'content' }, children));
+	    return React.createElement('div', { className: itemCls }, React.createElement('div', { className: headerCls, onClick: this.handleItemClick,
+	      role: 'tab', 'aria-expanded': isActive }, header), React.createElement('div', { className: contentCls, ref: 'content', role: 'tabpanel' }, React.createElement('div', { className: prefixCls + '-content-box' }, children)));
 	  },
 	
 	  componentDidMount: function componentDidMount() {
 	    if (this.props.isActive) {
 	      var el = findDOMNode(this.refs.content);
 	      el.style.height = 'auto';
-	      el.style.opacity = 1;
 	    }
 	  },
 	
@@ -669,15 +669,12 @@ webpackJsonp([0,1],[
 	
 	    // start state
 	    el.style.height = opacity ? scrollHeight : 0;
-	    el.style.opacity = opacity;
 	
-	    cssAnimation.setTransition(el, 'Property', 'height ,opacity');
+	    cssAnimation.setTransition(el, 'Property', 'height');
 	    cssAnimation.style(el, {
-	      height: opacity ? 0 : scrollHeight,
-	      opacity: opacity ? 0 : 1
+	      height: opacity ? 0 : scrollHeight
 	    }, function () {
 	      el.style.height = opacity ? 0 : 'auto';
-	      el.style.opacity = opacity ? 0 : 1;
 	      cssAnimation.setTransition(el, 'Property', '');
 	    });
 	  }

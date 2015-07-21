@@ -145,7 +145,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-collapse-content {\n  height: 0;\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  overflow: hidden;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse {\n  background-color: #fbfbfb;\n  border-radius: 3px;\n  border-top: 1px solid #e9e9e9;\n  border-left: 1px solid #e9e9e9;\n  border-right: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #f4f4f4;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse-content-active {\n  border-bottom: 1px solid #e9e9e9;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header {\n  border-bottom: none;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
+	exports.push([module.id, ".rc-collapse {\n  background-color: #f4f4f4;\n  border-radius: 3px;\n  border: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item {\n  border-top: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item:first-child {\n  border-top: none;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  height: 0;\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  overflow: hidden;\n  color: #666666;\n  padding: 0 16px;\n  background-color: #fff;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -498,13 +498,13 @@ webpackJsonp([0,1],[
 	    var _this = this;
 	
 	    return function () {
+	      var activeKey = _this._getActivityKey();
 	      if (_this.props.accordion) {
 	        _this.setState({
-	          activeKey: key
+	          activeKey: key === activeKey ? null : key
 	        });
 	      } else {
 	
-	        var activeKey = _this._getActivityKey();
 	        var index = activeKey.indexOf(key);
 	        var isActive = index > -1;
 	        if (isActive) {
@@ -548,7 +548,7 @@ webpackJsonp([0,1],[
 	      var header = child.props.header;
 	      var isActive = false;
 	      if (accordion) {
-	        isActive = !activeKey ? !i : activeKey === key;
+	        isActive = activeKey === key;
 	      } else {
 	        isActive = activeKey.indexOf(key) > -1;
 	      }

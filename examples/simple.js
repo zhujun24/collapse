@@ -12,10 +12,10 @@ webpackJsonp([0,1],[
 	'use strict';
 	
 	__webpack_require__(2);
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"string.prototype.repeat\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	var Collapse = __webpack_require__(6);
+	__webpack_require__(6);
+	var Collapse = __webpack_require__(7);
 	var Panel = Collapse.Panel;
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(10);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
@@ -366,35 +366,91 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-	
-	module.exports = __webpack_require__(7);
+	/*! http://mths.be/repeat v0.2.0 by @mathias */
+	if (!String.prototype.repeat) {
+		(function() {
+			'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
+			var defineProperty = (function() {
+				// IE 8 only supports `Object.defineProperty` on DOM elements
+				try {
+					var object = {};
+					var $defineProperty = Object.defineProperty;
+					var result = $defineProperty(object, object, object) && $defineProperty;
+				} catch(error) {}
+				return result;
+			}());
+			var repeat = function(count) {
+				if (this == null) {
+					throw TypeError();
+				}
+				var string = String(this);
+				// `ToInteger`
+				var n = count ? Number(count) : 0;
+				if (n != n) { // better `isNaN`
+					n = 0;
+				}
+				// Account for out-of-bounds indices
+				if (n < 0 || n == Infinity) {
+					throw RangeError();
+				}
+				var result = '';
+				while (n) {
+					if (n % 2 == 1) {
+						result += string;
+					}
+					if (n > 1) {
+						string += string;
+					}
+					n >>= 1;
+				}
+				return result;
+			};
+			if (defineProperty) {
+				defineProperty(String.prototype, 'repeat', {
+					'value': repeat,
+					'configurable': true,
+					'writable': true
+				});
+			} else {
+				String.prototype.repeat = repeat;
+			}
+		}());
+	}
+
 
 /***/ },
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// export this package's api
 	'use strict';
 	
 	module.exports = __webpack_require__(8);
-	module.exports.Panel = __webpack_require__(10);
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// export this package's api
 	'use strict';
 	
-	var _require = __webpack_require__(9);
+	module.exports = __webpack_require__(9);
+	module.exports.Panel = __webpack_require__(11);
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _require = __webpack_require__(10);
 	
 	var PropTypes = _require.PropTypes;
 	var createClass = _require.createClass;
 	var Children = _require.Children;
 	
-	var CollapsePanel = __webpack_require__(10);
+	var CollapsePanel = __webpack_require__(11);
 	
 	if (!Array.isArray) {
 	  Array.isArray = function (arg) {
@@ -529,27 +585,27 @@ webpackJsonp([0,1],[
 	});
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var _require = __webpack_require__(9);
+	var _require = __webpack_require__(10);
 	
 	var createClass = _require.createClass;
 	var PropTypes = _require.PropTypes;
 	var findDOMNode = _require.findDOMNode;
 	
-	var classnames = __webpack_require__(11);
-	var cssAnimation = __webpack_require__(12);
+	var classnames = __webpack_require__(12);
+	var cssAnimation = __webpack_require__(13);
 	
 	module.exports = createClass({
 	
@@ -649,7 +705,7 @@ webpackJsonp([0,1],[
 	});
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -704,13 +760,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(13);
-	var Css = __webpack_require__(14);
+	var Event = __webpack_require__(14);
+	var Css = __webpack_require__(15);
 	
 	var cssAnimation = function cssAnimation(node, transitionName, callback) {
 	  var className = transitionName;
@@ -803,7 +859,7 @@ webpackJsonp([0,1],[
 	module.exports = cssAnimation;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	
@@ -890,7 +946,7 @@ webpackJsonp([0,1],[
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';

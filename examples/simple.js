@@ -12,78 +12,39 @@ webpackJsonp([0,1],[
 	'use strict';
 	
 	__webpack_require__(2);
-	__webpack_require__(6);
-	var Collapse = __webpack_require__(7);
-	var Panel = Collapse.Panel;
+	var Accordion = __webpack_require__(6);
+	var Panel = Accordion.Panel;
 	var React = __webpack_require__(9);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
-	function random() {
-	  return parseInt(Math.random() * 10) + 1;
-	}
-	
 	var Test = React.createClass({
 	  displayName: 'Test',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      time: random(),
-	      accordion: false
-	    };
-	  },
 	
 	  getItems: function getItems() {
 	    var items = [];
 	    for (var i = 0, len = 3; i < len; i++) {
-	      var key = i + 1;
 	      items.push(React.createElement(
 	        Panel,
-	        { header: 'This is panel header ' + key, key: key },
+	        { header: 'This is panel header ' + (i + 1), key: i },
 	        React.createElement(
 	          'p',
 	          null,
-	          text.repeat(this.state.time)
+	          text.repeat(parseInt(Math.random() * 10) + 1)
 	        )
 	      ));
 	    }
-	    items.push(React.createElement(
-	      Panel,
-	      { header: 'This is panel header 4', key: '4' },
-	      React.createElement(
-	        Collapse,
-	        { defaultActiveKey: '1' },
-	        React.createElement(
-	          Panel,
-	          { header: 'This is panel nest panel', key: '1' },
-	          React.createElement(
-	            'p',
-	            null,
-	            text
-	          )
-	        )
-	      )
-	    ));
 	
 	    return items;
 	  },
 	
-	  toggle: function toggle() {
-	    this.setState({ accordion: !this.state.accordion });
-	  },
-	
 	  reRender: function reRender() {
-	    this.setState({ time: random() });
-	  },
-	
-	  setActivityKey: function setActivityKey() {
-	    this.setState({ activeKey: ['2'] });
+	    this.setState({
+	      time: 1
+	    });
 	  },
 	
 	  render: function render() {
-	    var accordion = this.state.accordion;
-	    var btn = accordion ? 'accordion' : 'collapse';
-	    var activeKey = this.state.activeKey;
 	    return React.createElement(
 	      'div',
 	      { style: { margin: 20, width: 400 } },
@@ -92,23 +53,11 @@ webpackJsonp([0,1],[
 	        { onClick: this.reRender },
 	        'reRender'
 	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.toggle },
-	        btn
-	      ),
 	      React.createElement('br', null),
 	      React.createElement('br', null),
 	      React.createElement(
-	        'button',
-	        { onClick: this.setActivityKey },
-	        'active header 2'
-	      ),
-	      React.createElement('br', null),
-	      React.createElement('br', null),
-	      React.createElement(
-	        Collapse,
-	        { accordion: accordion, activeKey: activeKey, defaultActiveKey: ['4'] },
+	        Accordion,
+	        null,
 	        this.getItems()
 	      )
 	    );
@@ -131,8 +80,8 @@ webpackJsonp([0,1],[
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css", function() {
-			var newContent = require("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css");
+		module.hot.accept("!!/Users/yiminghe/code/react-components/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css", function() {
+			var newContent = require("!!/Users/yiminghe/code/react-components/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -145,7 +94,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-collapse {\n  background-color: #f4f4f4;\n  border-radius: 3px;\n  border: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item {\n  border-top: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item:first-child {\n  border-top: none;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  height: 0;\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  overflow: hidden;\n  color: #666666;\n  padding: 0 16px;\n  background-color: #fff;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
+	exports.push([module.id, ".rc-accordion-content {\n  height: 0;\n  opacity: 0;\n  transition-duration: .3s;\n  transition-timing-function: ease-in;\n  overflow: hidden;\n}\n.rc-accordion-content-active {\n  opacity: 1;\n  height: auto;\n}\n.rc-accordion {\n  background-color: #f3f5f7;\n  border-radius: 3px;\n  border-top: 1px solid #d9d9d9;\n  border-left: 1px solid #d9d9d9;\n  border-right: 1px solid #d9d9d9;\n}\n.rc-accordion-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-header::before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-accordion-content {\n  color: #999;\n  padding: 0 16px;\n  background-color: #fbfbfb;\n}\n.rc-accordion-content-active {\n  border-bottom: 1px solid #d9d9d9;\n}\n.rc-accordion-item-active .rc-accordion-header::before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -366,59 +315,11 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/*! http://mths.be/repeat v0.2.0 by @mathias */
-	if (!String.prototype.repeat) {
-		(function() {
-			'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
-			var defineProperty = (function() {
-				// IE 8 only supports `Object.defineProperty` on DOM elements
-				try {
-					var object = {};
-					var $defineProperty = Object.defineProperty;
-					var result = $defineProperty(object, object, object) && $defineProperty;
-				} catch(error) {}
-				return result;
-			}());
-			var repeat = function(count) {
-				if (this == null) {
-					throw TypeError();
-				}
-				var string = String(this);
-				// `ToInteger`
-				var n = count ? Number(count) : 0;
-				if (n != n) { // better `isNaN`
-					n = 0;
-				}
-				// Account for out-of-bounds indices
-				if (n < 0 || n == Infinity) {
-					throw RangeError();
-				}
-				var result = '';
-				while (n) {
-					if (n % 2 == 1) {
-						result += string;
-					}
-					if (n > 1) {
-						string += string;
-					}
-					n >>= 1;
-				}
-				return result;
-			};
-			if (defineProperty) {
-				defineProperty(String.prototype, 'repeat', {
-					'value': repeat,
-					'configurable': true,
-					'writable': true
-				});
-			} else {
-				String.prototype.repeat = repeat;
-			}
-		}());
-	}
-
+	'use strict';
+	
+	module.exports = __webpack_require__(7);
 
 /***/ },
 /* 7 */
@@ -436,53 +337,29 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	var _require = __webpack_require__(9);
+	var React = __webpack_require__(9);
+	var AccordionPanel = __webpack_require__(10);
 	
-	var PropTypes = _require.PropTypes;
-	var createClass = _require.createClass;
-	var Children = _require.Children;
+	module.exports = React.createClass({
 	
-	var CollapsePanel = __webpack_require__(10);
-	
-	if (!Array.isArray) {
-	  Array.isArray = function (arg) {
-	    return Object.prototype.toString.call(arg) === '[object Array]';
-	  };
-	}
-	
-	module.exports = createClass({
-	
-	  displayName: 'Collapse',
+	  displayName: 'Accordion',
 	
 	  propTypes: {
-	    prefixCls: PropTypes.string,
-	    activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-	    defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-	    onChange: PropTypes.func,
-	    accordion: PropTypes.bool
+	    prefixCls: React.PropTypes.string,
+	    activeKey: React.PropTypes.string,
+	    onSwitch: React.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      prefixCls: 'rc-collapse',
-	      onChange: function onChange() {},
-	      accordion: false
+	      prefixCls: 'rc-accordion',
+	      onSwitch: function onSwitch() {}
 	    };
 	  },
 	
 	  getInitialState: function getInitialState() {
-	    var _props = this.props;
-	    var defaultActiveKey = _props.defaultActiveKey;
-	    var activeKey = _props.activeKey;
-	    var accordion = _props.accordion;
-	
-	    // If is not accordion mode, then, defaultActiveKey should be an array
-	    if (!accordion) {
-	      defaultActiveKey = defaultActiveKey || [];
-	    }
-	
 	    return {
-	      activeKey: activeKey || defaultActiveKey
+	      activeKey: null
 	    };
 	  },
 	
@@ -498,59 +375,27 @@ webpackJsonp([0,1],[
 	    var _this = this;
 	
 	    return function () {
-	      var activeKey = _this._getActivityKey();
-	      if (_this.props.accordion) {
-	        _this.setState({
-	          activeKey: key === activeKey ? null : key
-	        });
-	      } else {
-	
-	        var index = activeKey.indexOf(key);
-	        var isActive = index > -1;
-	        if (isActive) {
-	          // remove active state
-	          activeKey.splice(index, 1);
-	        } else {
-	          activeKey.push(key);
-	        }
-	
-	        _this.setState({ activeKey: activeKey });
-	      }
-	      _this.props.onChange(key);
+	      _this.props.onSwitch(key);
+	      _this.setState({
+	        activeKey: key
+	      });
 	    };
-	  },
-	
-	  _getActivityKey: function _getActivityKey() {
-	    var activeKey = this.state.activeKey;
-	    var accordion = this.props.accordion;
-	
-	    if (accordion && Array.isArray(activeKey)) {
-	      activeKey = activeKey[0];
-	    }
-	
-	    if (!accordion && !Array.isArray(activeKey)) {
-	      activeKey = activeKey ? [activeKey] : [];
-	    }
-	    return activeKey;
 	  },
 	
 	  getItems: function getItems() {
 	    var _this2 = this;
 	
-	    var activeKey = this._getActivityKey();
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var accordion = _props2.accordion;
-	
-	    return Children.map(this.props.children, function (child, i) {
+	    var activeKey = this.state.activeKey;
+	    var prefixCls = this.props.prefixCls;
+	    return React.Children.map(this.props.children, function (child, i) {
 	      // If there is no key provide, use the panel order as default key
 	      var key = child.key || i;
 	      var header = child.props.header;
 	      var isActive = false;
-	      if (accordion) {
-	        isActive = activeKey === key;
+	      if (!activeKey) {
+	        isActive = !i;
 	      } else {
-	        isActive = activeKey.indexOf(key) > -1;
+	        isActive = activeKey === key;
 	      }
 	
 	      var props = {
@@ -562,13 +407,17 @@ webpackJsonp([0,1],[
 	        onItemClick: _this2.handleClickItem(key).bind(_this2)
 	      };
 	
-	      return React.createElement(CollapsePanel, props);
+	      return React.createElement(AccordionPanel, props);
 	    });
 	  },
 	
 	  render: function render() {
 	    var prefixCls = this.props.prefixCls;
-	    return React.createElement('div', { className: prefixCls }, this.getItems());
+	    return React.createElement(
+	      'div',
+	      { className: prefixCls },
+	      this.getItems()
+	    );
 	  }
 	});
 
@@ -584,13 +433,7 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-	  } else {
-	    obj[key] = value;
-	  }return obj;
-	}
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var _require = __webpack_require__(9);
 	
@@ -603,17 +446,13 @@ webpackJsonp([0,1],[
 	
 	module.exports = createClass({
 	
-	  displayName: 'CollapsePanel',
+	  displayName: 'AccordionPanel',
 	
 	  propTypes: {
 	    prefixCls: PropTypes.string,
 	    header: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
 	    isActive: PropTypes.bool,
 	    onItemClick: PropTypes.func
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    return { isActive: this.props.isActive };
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -623,10 +462,6 @@ webpackJsonp([0,1],[
 	    };
 	  },
 	
-	  handleItemClick: function handleItemClick() {
-	    this.props.onItemClick();
-	  },
-	
 	  render: function render() {
 	    var _classnames, _classnames2;
 	
@@ -634,51 +469,72 @@ webpackJsonp([0,1],[
 	    var prefixCls = _props.prefixCls;
 	    var header = _props.header;
 	    var children = _props.children;
+	    var onItemClick = _props.onItemClick;
 	    var isActive = _props.isActive;
 	
 	    var headerCls = prefixCls + '-header';
 	    var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
 	    var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
 	
-	    return React.createElement('div', { className: itemCls }, React.createElement('div', { className: headerCls, onClick: this.handleItemClick,
-	      role: 'tab', 'aria-expanded': isActive }, header), React.createElement('div', { className: contentCls, ref: 'content', role: 'tabpanel' }, React.createElement('div', { className: prefixCls + '-content-box' }, children)));
+	    return React.createElement(
+	      'div',
+	      { className: itemCls },
+	      React.createElement(
+	        'div',
+	        { className: headerCls, onClick: onItemClick },
+	        header
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: contentCls, ref: "content" },
+	        children
+	      )
+	    );
 	  },
 	
 	  componentDidMount: function componentDidMount() {
 	    if (this.props.isActive) {
 	      var el = findDOMNode(this.refs.content);
-	      el.style.height = 'auto';
+	      el.style.height = el.scrollHeight + 'px';
 	    }
 	  },
 	
 	  componentDidUpdate: function componentDidUpdate(prevProps) {
 	
-	    var isActive = this.props.isActive;
-	
 	    // no change
-	    if (prevProps.isActive === isActive) {
+	    if (prevProps.isActive === this.props.isActive) {
 	      return;
 	    }
 	
-	    this._anim(isActive ? 0 : 1);
-	  },
-	
-	  _anim: function _anim(opacity) {
-	    var el = findDOMNode(this.refs.content);
-	    var scrollHeight = el.scrollHeight + 'px';
-	
-	    // start state
-	    el.style.height = opacity ? scrollHeight : 0;
-	
-	    cssAnimation.setTransition(el, 'Property', 'height');
-	    cssAnimation.style(el, {
-	      height: opacity ? 0 : scrollHeight
-	    }, function () {
-	      el.style.height = opacity ? 0 : 'auto';
-	      cssAnimation.setTransition(el, 'Property', '');
-	    });
+	    // current isActive
+	    if (!this.props.isActive) {
+	      var preNode = findDOMNode(this.refs.content);
+	      preNode.style.height = preNode.scrollHeight + 'px';
+	      preNode.style.opacity = 1;
+	      cssAnimation.setTransition(preNode, 'Property', 'height ,opacity');
+	      cssAnimation.style(preNode, {
+	        height: 0,
+	        opacity: 0
+	      }, function () {
+	        preNode.style.height = '';
+	        preNode.style.opacity = '';
+	        cssAnimation.setTransition(preNode, 'Property', '');
+	      });
+	    } else {
+	      // from isActive to hide
+	      var currentNode = findDOMNode(this.refs.content);
+	      currentNode.style.height = 0;
+	      cssAnimation.setTransition(currentNode, 'Property', 'height ,opacity');
+	      cssAnimation.style(currentNode, {
+	        height: currentNode.scrollHeight + 'px',
+	        opacity: 1
+	      }, function () {
+	        currentNode.style.height = 'auto';
+	        currentNode.style.opacity = 1;
+	        cssAnimation.setTransition(currentNode, 'Property', '');
+	      });
+	    }
 	  }
-	
 	});
 
 /***/ },

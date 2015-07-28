@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-accordion@1.1.0 - rc-accordion ui component for react</title>
+  <title>rc-collapse@1.2.3 - rc-collapse ui component for react</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-accordion@1.1.0</h1>
+  <h1>rc-collapse@1.2.3</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -754,29 +754,31 @@
   <h3>readme.md</h3>
 
   <div class="markdown-body">
-    <h1>rc-accordion<a id="user-content-rc-accordion" name="rc-accordion" class="anchor" aria-hidden="true" href="#rc-accordion"><span class="octicon octicon-link"></span></a></h1><hr>
-<p>rc-accordion ui component for react</p>
-<p><a href="http://npmjs.org/package/rc-accordion" title="null"><img src="http://img.shields.io/npm/v/rc-accordion.svg?style=flat-square" alt="NPM version"></a>
-<a href="https://travis-ci.org/react-component/accordion" title="null"><img src="https://img.shields.io/travis/react-component/accordion.svg?style=flat-square" alt="build status"></a>
-<a href="https://coveralls.io/r/react-component/accordion?branch=master" title="null"><img src="https://img.shields.io/coveralls/react-component/accordion.svg?style=flat-square" alt="Test coverage"></a>
-<a href="https://npmjs.org/package/rc-accordion" title="null"><img src="https://img.shields.io/npm/dm/rc-accordion.svg?style=flat-square" alt="npm download"></a></p>
+    <h1>rc-collapse<a id="user-content-rc-collapse" name="rc-collapse" class="anchor" aria-hidden="true" href="#rc-collapse"><span class="octicon octicon-link"></span></a></h1><hr>
+<p>rc-collapse ui component for react</p>
+<p><a href="http://npmjs.org/package/rc-collapse" title="null"><img src="http://img.shields.io/npm/v/rc-collapse.svg?style=flat-square" alt="NPM version"></a>
+<a href="https://travis-ci.org/react-component/collapse" title="null"><img src="https://img.shields.io/travis/react-component/collapse.svg?style=flat-square" alt="build status"></a>
+<a href="https://coveralls.io/r/react-component/collapse?branch=master" title="null"><img src="https://img.shields.io/coveralls/react-component/collapse.svg?style=flat-square" alt="Test coverage"></a>
+<a href="https://npmjs.org/package/rc-collapse" title="null"><img src="https://img.shields.io/npm/dm/rc-collapse.svg?style=flat-square" alt="npm download"></a>
+<a href="https://saucelabs.com/u/rc-collapse" title="null"><img src="https://saucelabs.com/buildstatus/rc-collapse" alt="Sauce Test Status"></a>
+<a href="https://saucelabs.com/u/rc-collapse" title="null"><img src="https://saucelabs.com/browser-matrix/rc-collapse.svg" alt="Sauce Test Status"></a></p>
 <h2>Development<a id="user-content-development" name="development" class="anchor" aria-hidden="true" href="#development"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre class="hljs"><code class="undefined"><span class="hljs-built_in">npm</span> install
 <span class="hljs-built_in">npm</span> start</code></pre></div><h2>Example<a id="user-content-example" name="example" class="anchor" aria-hidden="true" href="#example"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8000/examples/" title="null">http://localhost:8000/examples/</a></p>
-<p>online example: <a href="http://react-component.github.io/accordion/examples/" title="null">http://react-component.github.io/accordion/examples/</a></p>
+<p>online example: <a href="http://react-component.github.io/collapse/examples/" title="null">http://react-component.github.io/collapse/examples/</a></p>
 <h2>Feature<a id="user-content-feature" name="feature" class="anchor" aria-hidden="true" href="#feature"><span class="octicon octicon-link"></span></a></h2><ul>
 <li>support ie8,ie8+,chrome,firefox,safari</li>
 </ul>
-<h2>install<a id="user-content-install" name="install" class="anchor" aria-hidden="true" href="#install"><span class="octicon octicon-link"></span></a></h2><p><a href="https://npmjs.org/package/rc-accordion" title="null"><img src="https://nodei.co/npm/rc-accordion.png" alt="rc-accordion"></a></p>
-<h2>Usage<a id="user-content-usage" name="usage" class="anchor" aria-hidden="true" href="#usage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre class="hljs"><code class="js"><span class="hljs-keyword">var</span> Accordion = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-accordion'</span>);
-<span class="hljs-keyword">var</span> Panel = Accordion.Panel;
+<h2>install<a id="user-content-install" name="install" class="anchor" aria-hidden="true" href="#install"><span class="octicon octicon-link"></span></a></h2><p><a href="https://npmjs.org/package/rc-collapse" title="null"><img src="https://nodei.co/npm/rc-collapse.png" alt="rc-collapse"></a></p>
+<h2>Usage<a id="user-content-usage" name="usage" class="anchor" aria-hidden="true" href="#usage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre class="hljs"><code class="js"><span class="hljs-keyword">var</span> Collapse = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-collapse'</span>);
+<span class="hljs-keyword">var</span> Panel = Collapse.Panel;
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
-<span class="hljs-keyword">var</span> accordion = (
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Accordion</span>&gt;</span>
+<span class="hljs-keyword">var</span> collapse = (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Collapse</span> <span class="hljs-attribute">accordion</span>=<span class="hljs-value">{true}</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Panel</span> <span class="hljs-attribute">header</span>=<span class="hljs-value">"hello"</span>&gt;</span>this is panel content<span class="hljs-tag">&lt;/<span class="hljs-title">Panel</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Panel</span> <span class="hljs-attribute">header</span>=<span class="hljs-value">"title2"</span>&gt;</span>this is panel content2 or other<span class="hljs-tag">&lt;/<span class="hljs-title">Panel</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">Accordion</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">Collapse</span>&gt;</span>
 )</span>;
-React.render(accordion, container);</code></pre></div><h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><h3>Accordion<a id="user-content-accordion" name="accordion" class="anchor" aria-hidden="true" href="#accordion"><span class="octicon octicon-link"></span></a></h3><h4>props:<a id="user-content-props" name="props" class="anchor" aria-hidden="true" href="#props"><span class="octicon octicon-link"></span></a></h4><table class="table table-bordered table-striped">
+React.render(collapse, container);</code></pre></div><h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><h3>Collapse<a id="user-content-collapse" name="collapse" class="anchor" aria-hidden="true" href="#collapse"><span class="octicon octicon-link"></span></a></h3><h4>props:<a id="user-content-props" name="props" class="anchor" aria-hidden="true" href="#props"><span class="octicon octicon-link"></span></a></h4><table class="table table-bordered table-striped">
     <thead>
     <tr>
         <th style="width: 100px;">name</th>
@@ -788,20 +790,38 @@ React.render(accordion, container);</code></pre></div><h2>API<a id="user-content
     <tbody>
       <tr>
           <td>activeKey</td>
-          <td>String</td>
+          <td>Array<String>|String</td>
           <th>The first panel key</th>
           <td>current active Panel key</td>
       </tr>
       <tr>
-          <td>onSwitch</td>
+          <td>defaultActiveKey</td>
+          <td>Array<String>|String</td>
+          <th>null</th>
+          <td>default active key</td>
+      </tr>
+      <tr>
+          <td>accordion</td>
+          <td>Boolean</td>
+          <th>false</th>
+          <td>accordion mode, default is null, is collapse mode</td>
+      </tr>
+      <tr>
+          <td>onChange</td>
           <td>Function(key)</td>
           <th>noop</th>
-          <td>called when accordion Panel is changed</td>
+          <td>called when collapse Panel is changed</td>
       </tr>
     </tbody>
 </table>
 
-<h3>Accordion.Panel<a id="user-content-accordion-panel" name="accordion-panel" class="anchor" aria-hidden="true" href="#accordion-panel"><span class="octicon octicon-link"></span></a></h3><h4>props<a id="user-content-props" name="props" class="anchor" aria-hidden="true" href="#props"><span class="octicon octicon-link"></span></a></h4><table class="table table-bordered table-striped">
+<p>If accordion is null or false, every panel open, will not close other panel.
+<code>activekey</code> should be an array. string will work fine, activekey will be an
+array, and the only item is the activeKey string provided;</p>
+<p>If accordion is true, only on panel can be active.
+<code>activekey</code> should be an string, but array is support too, just use the first
+item.</p>
+<h3>Collapse.Panel<a id="user-content-collapse-panel" name="collapse-panel" class="anchor" aria-hidden="true" href="#collapse-panel"><span class="octicon octicon-link"></span></a></h3><h4>props<a id="user-content-props" name="props" class="anchor" aria-hidden="true" href="#props"><span class="octicon octicon-link"></span></a></h4><table class="table table-bordered table-striped">
     <thead>
     <tr>
         <th style="width: 100px;">name</th>
@@ -823,11 +843,11 @@ React.render(accordion, container);</code></pre></div><h2>API<a id="user-content
 <h4>key<a id="user-content-key" name="key" class="anchor" aria-hidden="true" href="#key"><span class="octicon octicon-link"></span></a></h4><p>If no key provide, key value will be the panel index.</p>
 <h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8000/tests/runner.html?coverage" title="null">http://localhost:8000/tests/runner.html?coverage</a></p>
 <h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8000/tests/runner.html?coverage" title="null">http://localhost:8000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8000/tests/runner.html?coverage</a></p>
-<h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-accordion is released under the MIT license.</p>
+<h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-collapse is released under the MIT license.</p>
 
   </div>
 </div>
-<a href="http://github.com/react-component/rc-accordion"><img style="position: absolute; top: 0; right: 0; border: 0;"
+<a href="http://github.com/react-component/rc-collapse"><img style="position: absolute; top: 0; right: 0; border: 0;"
                             src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
                             alt="Fork me on GitHub"
                             data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>

@@ -15,7 +15,7 @@ webpackJsonp([0,1],[
 	__webpack_require__(6);
 	var Collapse = __webpack_require__(7);
 	var Panel = Collapse.Panel;
-	var React = __webpack_require__(10);
+	var React = __webpack_require__(9);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
@@ -49,13 +49,13 @@ webpackJsonp([0,1],[
 	    }
 	    items.push(React.createElement(
 	      Panel,
-	      { header: 'This is panel header 4', key: "4" },
+	      { header: 'This is panel header 4', key: '4' },
 	      React.createElement(
 	        Collapse,
-	        { defaultActiveKey: "1" },
+	        { defaultActiveKey: '1' },
 	        React.createElement(
 	          Panel,
-	          { header: 'This is panel nest panel', key: "1" },
+	          { header: 'This is panel nest panel', key: '1' },
 	          React.createElement(
 	            'p',
 	            null,
@@ -131,8 +131,8 @@ webpackJsonp([0,1],[
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/yiminghe/code/react-components/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css", function() {
-			var newContent = require("!!/Users/yiminghe/code/react-components/rc-tools/node_modules/css-loader/index.js!/Users/yiminghe/code/react-components/accordion/assets/index.css");
+		module.hot.accept("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css", function() {
+			var newContent = require("!!/Users/eward/code/accordion/node_modules/rc-tools/node_modules/css-loader/index.js!/Users/eward/code/accordion/assets/index.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -145,7 +145,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
-	exports.push([module.id, ".rc-collapse {\n  background-color: #f4f4f4;\n  border-radius: 3px;\n  border: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item {\n  border-top: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item:first-child {\n  border-top: none;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  height: 0;\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  overflow: hidden;\n  color: #666666;\n  padding: 0 16px;\n  background-color: #fff;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
+	exports.push([module.id, ".rc-collapse {\n  background-color: #f4f4f4;\n  border-radius: 3px;\n  border: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item {\n  border-top: 1px solid #d9d9d9;\n}\n.rc-collapse > .rc-collapse-item:first-child {\n  border-top: none;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header {\n  height: 38px;\n  line-height: 38px;\n  text-indent: 16px;\n  color: #666;\n}\n.rc-collapse > .rc-collapse-item > .rc-collapse-header:before {\n  display: inline-block;\n  content: '\\20';\n  width: 0;\n  height: 0;\n  font-size: 0;\n  line-height: 0;\n  border-top: 3px solid transparent;\n  border-bottom: 3px solid transparent;\n  border-left: 4px solid #666666;\n  vertical-align: middle;\n  margin-right: 8px;\n}\n.rc-collapse-content {\n  height: 0;\n  overflow: hidden;\n  color: #666666;\n  padding: 0 16px;\n  background-color: #fff;\n}\n.rc-collapse-content > .rc-collapse-content-box {\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.rc-collapse-item:last-child > .rc-collapse-content {\n  border-radius: 0 0 3px 3px;\n}\n.rc-collapse-collapsing {\n  transition-duration: .3s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  transition-property: height;\n}\n.rc-collapse-content-active {\n  height: auto;\n}\n.rc-collapse > .rc-collapse-item-active > .rc-collapse-header:before {\n  border-left: 3px solid transparent;\n  border-right: 3px solid transparent;\n  border-top: 4px solid #666666;\n  margin-right: 6px;\n}\n", ""]);
 
 /***/ },
 /* 4 */
@@ -424,33 +424,24 @@ webpackJsonp([0,1],[
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// export this package's api
 	'use strict';
 	
 	module.exports = __webpack_require__(8);
+	module.exports.Panel = __webpack_require__(10);
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// export this package's api
 	'use strict';
 	
-	module.exports = __webpack_require__(9);
-	module.exports.Panel = __webpack_require__(11);
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
+	var React = __webpack_require__(9);
+	var PropTypes = React.PropTypes;
+	var createClass = React.createClass;
+	var Children = React.Children;
 	
-	var _require = __webpack_require__(10);
-	
-	var PropTypes = _require.PropTypes;
-	var createClass = _require.createClass;
-	var Children = _require.Children;
-	
-	var CollapsePanel = __webpack_require__(11);
+	var CollapsePanel = __webpack_require__(10);
 	
 	if (!Array.isArray) {
 	  Array.isArray = function (arg) {
@@ -480,11 +471,11 @@ webpackJsonp([0,1],[
 	
 	  getInitialState: function getInitialState() {
 	    var _props = this.props;
-	
-	    // If is not accordion mode, then, defaultActiveKey should be an array
 	    var defaultActiveKey = _props.defaultActiveKey;
 	    var activeKey = _props.activeKey;
 	    var accordion = _props.accordion;
+	
+	    // If is not accordion mode, then, defaultActiveKey should be an array
 	    if (!accordion) {
 	      defaultActiveKey = defaultActiveKey || [];
 	    }
@@ -576,36 +567,39 @@ webpackJsonp([0,1],[
 	
 	  render: function render() {
 	    var prefixCls = this.props.prefixCls;
-	    return React.createElement(
-	      'div',
-	      { className: prefixCls },
-	      this.getItems()
-	    );
+	    return React.createElement('div', { className: prefixCls }, this.getItems());
 	  }
 	});
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+	  } else {
+	    obj[key] = value;
+	  }return obj;
+	}
 	
-	var _require = __webpack_require__(10);
+	var React = __webpack_require__(9);
+	var PropTypes = React.PropTypes;
+	var createClass = React.createClass;
+	var findDOMNode = React.findDOMNode;
 	
-	var createClass = _require.createClass;
-	var PropTypes = _require.PropTypes;
-	var findDOMNode = _require.findDOMNode;
-	
-	var classnames = __webpack_require__(12);
-	var cssAnimation = __webpack_require__(13);
+	var classnames = __webpack_require__(11);
+	var cssAnimation = __webpack_require__(12);
+	var event = __webpack_require__(13);
+	var isSupportCssAnimate = event.endEvents.length > 0;
 	
 	module.exports = createClass({
 	
@@ -646,25 +640,8 @@ webpackJsonp([0,1],[
 	    var contentCls = classnames((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _classnames));
 	    var itemCls = classnames((_classnames2 = {}, _defineProperty(_classnames2, prefixCls + '-item', true), _defineProperty(_classnames2, prefixCls + '-item-active', isActive), _classnames2));
 	
-	    return React.createElement(
-	      'div',
-	      { className: itemCls },
-	      React.createElement(
-	        'div',
-	        { className: headerCls, onClick: this.handleItemClick,
-	          role: "tab", 'aria-expanded': isActive },
-	        header
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: contentCls, ref: "content", role: "tabpanel" },
-	        React.createElement(
-	          'div',
-	          { className: prefixCls + '-content-box' },
-	          children
-	        )
-	      )
-	    );
+	    return React.createElement('div', { className: itemCls }, React.createElement('div', { className: headerCls, onClick: this.handleItemClick,
+	      role: 'tab', 'aria-expanded': isActive }, header), React.createElement('div', { className: contentCls, ref: 'content', role: 'tabpanel' }, React.createElement('div', { className: prefixCls + '-content-box' }, children)));
 	  },
 	
 	  componentDidMount: function componentDidMount() {
@@ -688,7 +665,15 @@ webpackJsonp([0,1],[
 	
 	  _anim: function _anim(opacity) {
 	    var el = findDOMNode(this.refs.content);
+	    if (!isSupportCssAnimate) {
+	      el.style.height = opacity ? 'auto' : 0;
+	      return;
+	    }
+	
 	    var scrollHeight = el.scrollHeight + 'px';
+	    var collapsing = this.props.prefixCls + '-collapsing';
+	
+	    cssAnimation.addClass(el, collapsing);
 	
 	    // start state
 	    el.style.height = opacity ? scrollHeight : 0;
@@ -699,13 +684,14 @@ webpackJsonp([0,1],[
 	    }, function () {
 	      el.style.height = opacity ? 0 : 'auto';
 	      cssAnimation.setTransition(el, 'Property', '');
+	      cssAnimation.removeClass(el, collapsing);
 	    });
 	  }
 	
 	});
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -760,13 +746,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(14);
-	var Css = __webpack_require__(15);
+	var Event = __webpack_require__(13);
+	var Css = __webpack_require__(14);
 	
 	var cssAnimation = function cssAnimation(node, transitionName, callback) {
 	  var className = transitionName;
@@ -859,7 +845,7 @@ webpackJsonp([0,1],[
 	module.exports = cssAnimation;
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	
@@ -946,7 +932,7 @@ webpackJsonp([0,1],[
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';

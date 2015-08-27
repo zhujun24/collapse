@@ -15,7 +15,7 @@ webpackJsonp([0,1],[
 	__webpack_require__(3);
 	var Collapse = __webpack_require__(4);
 	var Panel = Collapse.Panel;
-	var React = __webpack_require__(8);
+	var React = __webpack_require__(7);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
@@ -194,19 +194,162 @@ webpackJsonp([0,1],[
 	// export this package's api
 	'use strict';
 	
-	module.exports = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Collapse\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	module.exports.Panel = __webpack_require__(7);
+	module.exports = __webpack_require__(6);
+	module.exports.Panel = __webpack_require__(8);
 
 /***/ },
-/* 6 */,
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(7);
+	var PropTypes = React.PropTypes;
+	var createClass = React.createClass;
+	var Children = React.Children;
+	
+	var CollapsePanel = __webpack_require__(8);
+	
+	module.exports = createClass({
+	
+	  displayName: 'Collapse',
+	
+	  propTypes: {
+	    prefixCls: PropTypes.string,
+	    activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+	    defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+	    onChange: PropTypes.func,
+	    accordion: PropTypes.bool
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      prefixCls: 'rc-collapse',
+	      onChange: function onChange() {},
+	      accordion: false
+	    };
+	  },
+	
+	  getInitialState: function getInitialState() {
+	    var _props = this.props;
+	    var activeKey = _props.activeKey;
+	    var accordion = _props.accordion;
+	    var defaultActiveKey = this.props.defaultActiveKey;
+	
+	    // If is not accordion mode, then, defaultActiveKey should be an array
+	    if (!accordion) {
+	      defaultActiveKey = defaultActiveKey || [];
+	    }
+	
+	    return {
+	      activeKey: activeKey || defaultActiveKey
+	    };
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if ('activeKey' in nextProps) {
+	      this.setState({
+	        activeKey: nextProps.activeKey
+	      });
+	    }
+	  },
+	
+	  handleClickItem: function handleClickItem(key) {
+	    var _this = this;
+	
+	    return function () {
+	      var activeKey = _this._getActivityKey();
+	      if (_this.props.accordion) {
+	        _this.setState({
+	          activeKey: key === activeKey ? null : key
+	        });
+	      } else {
+	        var index = activeKey.indexOf(key);
+	        var isActive = index > -1;
+	        if (isActive) {
+	          // remove active state
+	          activeKey.splice(index, 1);
+	        } else {
+	          activeKey.push(key);
+	        }
+	
+	        _this.setState({ activeKey: activeKey });
+	      }
+	      _this.props.onChange(key);
+	    };
+	  },
+	
+	  _getActivityKey: function _getActivityKey() {
+	    var activeKey = this.state.activeKey;
+	    var accordion = this.props.accordion;
+	
+	    if (accordion && Array.isArray(activeKey)) {
+	      activeKey = activeKey[0];
+	    }
+	
+	    if (!accordion && !Array.isArray(activeKey)) {
+	      activeKey = activeKey ? [activeKey] : [];
+	    }
+	    return activeKey;
+	  },
+	
+	  getItems: function getItems() {
+	    var _this2 = this;
+	
+	    var activeKey = this._getActivityKey();
+	    var _props2 = this.props;
+	    var prefixCls = _props2.prefixCls;
+	    var accordion = _props2.accordion;
+	
+	    return Children.map(this.props.children, function (child, i) {
+	      // If there is no key provide, use the panel order as default key
+	      var key = child.key || i;
+	      var header = child.props.header;
+	      var isActive = false;
+	      if (accordion) {
+	        isActive = activeKey === key;
+	      } else {
+	        isActive = activeKey.indexOf(key) > -1;
+	      }
+	
+	      var props = {
+	        key: key,
+	        header: header,
+	        isActive: isActive,
+	        prefixCls: prefixCls,
+	        children: child.props.children,
+	        onItemClick: _this2.handleClickItem(key).bind(_this2)
+	      };
+	
+	      return React.createElement(CollapsePanel, props);
+	    });
+	  },
+	
+	  render: function render() {
+	    var prefixCls = this.props.prefixCls;
+	    return React.createElement(
+	      'div',
+	      { className: prefixCls },
+	      this.getItems()
+	    );
+	  }
+	});
+
+/***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	module.exports = React;
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var React = __webpack_require__(8);
+	var React = __webpack_require__(7);
 	var PropTypes = React.PropTypes;
 	var createClass = React.createClass;
 	var findDOMNode = React.findDOMNode;
@@ -320,12 +463,6 @@ webpackJsonp([0,1],[
 	    });
 	  }
 	});
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	module.exports = React;
 
 /***/ },
 /* 9 */

@@ -11,11 +11,11 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"rc-collapse/assets/index.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	__webpack_require__(2);
-	var Collapse = __webpack_require__(3);
+	__webpack_require__(3);
+	var Collapse = __webpack_require__(4);
 	var Panel = Collapse.Panel;
-	var React = __webpack_require__(7);
+	var React = __webpack_require__(8);
 	
 	var text = '\n  A dog is a type of domesticated animal.\n  Known for its loyalty and faithfulness,\n  it can be found as a welcome guest in many households across the world.\n';
 	
@@ -121,6 +121,12 @@ webpackJsonp([0,1],[
 /* 2 */
 /***/ function(module, exports) {
 
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
 	/*! http://mths.be/repeat v0.2.0 by @mathias */
 	if (!String.prototype.repeat) {
 		(function() {
@@ -174,40 +180,40 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(4);
+	module.exports = __webpack_require__(5);
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// export this package's api
 	'use strict';
 	
 	module.exports = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Collapse\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	module.exports.Panel = __webpack_require__(6);
+	module.exports.Panel = __webpack_require__(7);
 
 /***/ },
-/* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var React = __webpack_require__(7);
+	var React = __webpack_require__(8);
 	var PropTypes = React.PropTypes;
 	var createClass = React.createClass;
 	var findDOMNode = React.findDOMNode;
 	
-	var classnames = __webpack_require__(8);
-	var cssAnimation = __webpack_require__(9);
-	var event = __webpack_require__(10);
+	var classnames = __webpack_require__(9);
+	var cssAnimation = __webpack_require__(10);
+	var event = __webpack_require__(11);
 	var isSupportCssAnimate = event.endEvents.length > 0;
 	
 	module.exports = createClass({
@@ -316,13 +322,13 @@ webpackJsonp([0,1],[
 	});
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -377,13 +383,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(10);
-	var Css = __webpack_require__(11);
+	var Event = __webpack_require__(11);
+	var Css = __webpack_require__(12);
 	
 	var cssAnimation = function cssAnimation(node, transitionName, callback) {
 	  var className = transitionName;
@@ -476,7 +482,7 @@ webpackJsonp([0,1],[
 	module.exports = cssAnimation;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	
@@ -563,7 +569,7 @@ webpackJsonp([0,1],[
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';

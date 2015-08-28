@@ -48,9 +48,5 @@
   },
   "precommit": [
     "lint"
-  ],
-  "dependencies": {
-    "classnames": "^2.1.2",
-    "css-animation": "~1.0.5"
-  }
+  ]
 }

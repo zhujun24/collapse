@@ -1,9 +1,5 @@
 const React = require('react');
 const { PropTypes, createClass, findDOMNode } = React;
-const classnames = require('classnames');
-const cssAnimation = require('css-animation');
-const event = require('css-animation/lib/Event');
-const isSupportCssAnimate = event.endEvents.length > 0;
 
 module.exports = createClass({
 
@@ -40,22 +36,18 @@ module.exports = createClass({
     const { prefixCls, header, children, isActive } = this.props;
 
     const headerCls = `${prefixCls}-header`;
-    const contentCls = classnames({
-      [`${prefixCls}-content`]: true,
-    });
-    const itemCls = classnames({
-      [`${prefixCls}-item`]: true,
-      [`${prefixCls}-item-active`]: isActive,
-    });
+    const contentCls = `${prefixCls}-content`;
+    const itemCls = `${prefixCls}-item`;
+    const itemActiveCls = isActive ? ` ${prefixCls}-item-active` : '';
 
     return (
-      <div className={itemCls}>
+      <div className={itemCls + itemActiveCls}>
         <div className={headerCls} onClick={this.handleItemClick}
              role="tab" aria-expanded={isActive}>
           <i className="arrow"></i>
           {header}
         </div>
-        <div className={contentCls} ref="content" role="tabpanel">
+        <div className={contentCls} ref="content" role="tabpanel" style={{height: isActive ? 'auto' : 0}}>
           <div className={`${prefixCls}-content-box`}>{children}</div>
         </div>
       </div>
@@ -77,36 +69,45 @@ module.exports = createClass({
     if (prevProps.isActive === isActive) {
       return;
     }
-    const el = findDOMNode(this.refs.content);
-    const pos = el.getBoundingClientRect();
-    const start = pos.bottom - pos.top + 'px';
-    el.style.height = start;
 
-    this._anim(isActive ? 0 : 1);
+    this._anim();
   },
 
-  _anim(opacity) {
+  _anim() {
     const el = findDOMNode(this.refs.content);
-    if (!isSupportCssAnimate) {
-      el.style.height = opacity ? 0 : 'auto';
-      return;
-    }
-    const collapsing = `${this.props.prefixCls}-collapsing`;
+    const keyframeNames = 'random' + new Date().getTime();
     const scrollHeight = el.scrollHeight + 'px';
-    clearTimeout(this.timer);
-    if (opacity) {
-      cssAnimation.addClass(el, collapsing);
-      el.style.height = 0;
-      this.timer = setTimeout(function() {
-        cssAnimation.removeClass(el, collapsing);
-      }, 300);
-    } else {
-      cssAnimation.addClass(el, collapsing);
-      el.style.height = scrollHeight;
-      this.timer = setTimeout(function() {
-        el.style.height = 'auto';
-        cssAnimation.removeClass(el, collapsing);
-      }, 300);
+    let end = el.style.height;
+    let start = 0;
+
+    if (end === '0px') {
+      start = scrollHeight;
     }
+    if (end === 'auto') {
+      end = scrollHeight;
+    }
+
+    function createKeyframe(keyframeName, startVal, endVal) {
+      const domPrefixes = ['webkit', 'moz', 'o', 'ms'];
+      let css = '';
+      for (let i = 0, l = domPrefixes.length; i < l; i++) {
+        css += '@-' + domPrefixes[i] + '-keyframes ' + keyframeName + ' {';
+        css += '0%{height:' + startVal + ';}';
+        css += '100%{height:' + endVal + ';}';
+        css += '}';
+      }
+      return css;
+    }
+
+    let style = document.getElementById('random-keyframes');
+    if (!style) {
+      style = document.createElement('style');
+      style.type = 'text/css';
+      style.id = 'random-keyframes';
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+    style.innerHTML = createKeyframe(keyframeNames, start, end);
+    el.style.animationName = keyframeNames;
+    el.style.WebkitAnimationName = keyframeNames;// Safari
   },
 });
